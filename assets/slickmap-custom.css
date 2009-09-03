@@ -1,0 +1,4 @@
+a:link:before,
+a:visited:before {
+	text-transform: lowercase;
+}
