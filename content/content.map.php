@@ -95,7 +95,7 @@
 				'rel' => 'stylesheet',
 				'type' => 'text/css',
 				'media' => 'print, screen',
-				'href' => URL . '/extensions/sitemap/assets/slickmap/sitemap.css'
+				'href' => URL . '/extensions/sitemap/assets/slickmap/slickmap.css'
 			)));
 			
 			$html->appendChild($head);
