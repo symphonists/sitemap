@@ -52,7 +52,7 @@
 			
 			$group = new XMLElement('fieldset');
 			$group->setAttribute('class', 'settings');
-			$group->appendChild(new XMLElement('legend', 'sitemap'));
+			$group->appendChild(new XMLElement('legend', 'Sitemap'));
 
 			$label = Widget::Label('Primary page types (top level)');
 			$label->appendChild(
