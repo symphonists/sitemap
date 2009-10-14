@@ -6,3 +6,11 @@ a:visited:before {
 #primaryNav li.placeholder {
 	visibility: hidden;
 }
+
+h1 {
+	text-transform: none !important;
+}
+
+h1 span {
+	color: #ccc;
+}

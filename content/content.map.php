@@ -21,7 +21,7 @@
 			$sitemap = new XMLElement('div', null, array('class' => 'sitemap'));
 			
 			// add headings
-			$sitemap->appendChild(new XMLElement('h1', $this->_Parent->Configuration->get('sitename', 'general')));
+			$sitemap->appendChild(new XMLElement('h1', 'Sitemap <span>' . $this->_Parent->Configuration->get('sitename', 'general') . '</span>'));
 			$sitemap->appendChild(new XMLElement('h2', 'Site Map, ' . date('d F Y', time())));
 			
 			// build container ULs
