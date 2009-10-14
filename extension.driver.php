@@ -35,6 +35,7 @@
 		public function install() {
 			
 			if (!$this->_Parent->Configuration->get('primary_type', 'sitemap')) {
+				$this->_Parent->Configuration->set('index_type', 'index', 'sitemap');
 				$this->_Parent->Configuration->set('primary_type', 'primary', 'sitemap');
 				$this->_Parent->Configuration->set('utilities_type', 'global', 'sitemap');
 				$this->_Parent->Configuration->set('exclude_type', 'hidden, XML, 403, 404', 'sitemap');
@@ -54,6 +55,15 @@
 			$group->setAttribute('class', 'settings');
 			$group->appendChild(new XMLElement('legend', 'Sitemap'));
 
+			$label = Widget::Label('Home page type');
+			$label->appendChild(
+				Widget::Input(
+					'settings[sitemap][index_type]',
+					General::Sanitize($this->_Parent->Configuration->get('index_type', 'sitemap'))
+				)
+			);
+			$group->appendChild($label);
+			
 			$label = Widget::Label('Primary page types (top level)');
 			$label->appendChild(
 				Widget::Input(

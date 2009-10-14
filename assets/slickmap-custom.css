@@ -2,3 +2,7 @@ a:link:before,
 a:visited:before {
 	text-transform: lowercase;
 }
+
+#primaryNav li.placeholder {
+	visibility: hidden;
+}

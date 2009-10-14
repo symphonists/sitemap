@@ -7,6 +7,11 @@
 		const SITEMAP_LEVELS = 3;
 		public $_pages = array();
 		
+		private $type_index = null;
+		private $type_primary = null;
+		private $type_utility = null;
+		private $type_exclude = null;
+		
 		function view(){
 			
 			// fetch all pages
@@ -24,9 +29,10 @@
 			$utilities = new XMLElement('ul', null, array('id' => 'utilityNav'));
 			
 			// get values from config: remove spaces, remove any trailing commas and split into an array
-			$type_primary = explode(',', trim(preg_replace('/ /', '', $this->_Parent->Configuration->get('primary_type', 'sitemap')), ','));
-			$type_utility = explode(',', trim(preg_replace('/ /', '', $this->_Parent->Configuration->get('utilities_type', 'sitemap')), ','));
-			$type_exclude = explode(',', trim(preg_replace('/ /', '', $this->_Parent->Configuration->get('exclude_type', 'sitemap')), ','));
+			$this->type_index = explode(',', trim(preg_replace('/ /', '', $this->_Parent->Configuration->get('index_type', 'sitemap')), ','));
+			$this->type_primary = explode(',', trim(preg_replace('/ /', '', $this->_Parent->Configuration->get('primary_type', 'sitemap')), ','));
+			$this->type_utility = explode(',', trim(preg_replace('/ /', '', $this->_Parent->Configuration->get('utilities_type', 'sitemap')), ','));
+			$this->type_exclude = explode(',', trim(preg_replace('/ /', '', $this->_Parent->Configuration->get('exclude_type', 'sitemap')), ','));
 			
 			// supplement list of pages with additional meta data
 			foreach($pages as $page) {
@@ -38,9 +44,9 @@
 				
 				if (count(array_intersect($page['types'], $type_exclude)) > 0) continue;
 				
-				$page['is_home'] = (is_null($page['parent']) && in_array('index', $page['types'])) ? true : false;
-				$page['is_primary'] = ($page['is_home'] == false && count(array_intersect($page['types'], $type_primary)) > 0) ? true : false;
-				$page['is_utility'] = (count(array_intersect($page['types'], $type_utility)) > 0) ? true : false;
+				$page['is_home'] = (count(array_intersect($page['types'], $this->type_index))) ? true : false;				
+				$page['is_primary'] = (count(array_intersect($page['types'], $this->type_primary)) > 0) ? true : false;
+				$page['is_utility'] = (count(array_intersect($page['types'], $this->type_utility)) > 0) ? true : false;
 				
 				$this->_pages[] = $page;
 			}
@@ -119,21 +125,27 @@
 			// concatenate URL with params
 			$meta = new XMLElement(
 				'span',
-				($root==true) ? URL : $page['url'] . (($page['params'] != '') ? '/{' . implode('}/{',explode('/',$page['params'])) . '}/' : ''),
+				($root==true) ? URL : $page['url'] . (($page['params'] != '') ? '/:' . implode('/:',explode('/',$page['params'])) . '' : ''),
 				array('class' => 'meta')
 			);
 			
+			$title = $page['title'];
+			if ($page['is_home'] && $page['is_primary']) $title .= ' (home)';
+			
 			$link = new XMLElement(
 				'a',
-				$page['title'] . $meta->generate(),
+				$title . $meta->generate(),
 				array('href' => ($root==true) ? URL : $page['url'] . '/')
 			);
 			
 			$page_element = new XMLElement('li', $link->generate());
 			
-			if ($root == true) $page_element->setAttribute('id', 'home');
-			if ($types != '') $page_element->setAttribute('class', $types);
+			$class = $types;
+			if ($root && $page['is_home'] && $page['is_primary']) $class .= ' placeholder';
 			
+			if ($root == true) $page_element->setAttribute('id', 'home');
+			if ($types != '') $page_element->setAttribute('class', $class);
+
 			$ul = null;
 			
 			// append direct child pages (recursive)
