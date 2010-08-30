@@ -4,11 +4,10 @@
 	
 		public function about(){
 			return array('name' => 'Sitemap',
-						 'version' => '1.0',
-						 'release-date' => '2009-10-02',
+						 'version' => '1.0.1',
+						 'release-date' => '2010-08-30',
 						 'author' => array('name' => 'Nick Dunn',
-										   'website' => 'http://nick-dunn.co.uk',
-										   'email' => 'nick@nick-dunn.co.uk')
+										   'website' => 'http://nick-dunn.co.uk')
 				 		);
 		}
 		

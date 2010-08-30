@@ -1,8 +1,8 @@
 # Sitemap
 
-* Version: 1.0
-* Author: Nick Dunn <nick.dunn@airlock.com>
-* Build Date: 2009-10-02
+* Version: 1.0.1
+* Author: Nick Dunn (http://nick-dunn.co.uk)
+* Build Date: 2010-08-30
 * Requirements: Symphony 2.0.3
 
 ## Installation
