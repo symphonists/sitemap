@@ -42,7 +42,7 @@
 				$page['edit-url'] = $this->_Parent->getCurrentPageURL() . 'edit/' . $page['id'] . '/';
 				$page['types'] = $page_types;
 				
-				if (count(array_intersect($page['types'], $type_exclude)) > 0) continue;
+				if (count(array_intersect($page['types'], $this->type_exclude)) > 0) continue;
 				
 				$page['is_home'] = (count(array_intersect($page['types'], $this->type_index))) ? true : false;				
 				$page['is_primary'] = (count(array_intersect($page['types'], $this->type_primary)) > 0) ? true : false;
