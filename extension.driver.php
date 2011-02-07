@@ -5,7 +5,7 @@
 		public function about(){
 			return array('name' => 'Sitemap',
 						 'version' => '1.0.2',
-						 'release-date' => '2010-08-30',
+						 'release-date' => '2011-02-07',
 						 'author' => array('name' => 'Nick Dunn',
 										   'website' => 'http://nick-dunn.co.uk')
 				 		);
