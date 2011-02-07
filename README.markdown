@@ -1,9 +1,9 @@
 # Sitemap
 
-* Version: 1.0.1
+* Version: 1.0.2
 * Author: Nick Dunn (http://nick-dunn.co.uk)
-* Build Date: 2010-08-30
-* Requirements: Symphony 2.0.3
+* Build Date: 2011-02-07
+* Requirements: Symphony 2.2
 
 ## Installation
 

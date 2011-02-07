@@ -15,13 +15,13 @@
 		function view(){
 			
 			// fetch all pages
-			$pages = $this->_Parent->Database->fetch("SELECT p.* FROM `tbl_pages` AS p ORDER BY p.sortorder ASC");
+			$pages = Symphony::Database()->fetch("SELECT p.* FROM `tbl_pages` AS p ORDER BY p.sortorder ASC");
 			
 			// build container DIV
 			$sitemap = new XMLElement('div', null, array('class' => 'sitemap'));
 			
 			// add headings
-			$sitemap->appendChild(new XMLElement('h1', 'Sitemap <span>' . $this->_Parent->Configuration->get('sitename', 'general') . '</span>'));
+			$sitemap->appendChild(new XMLElement('h1', 'Sitemap <span>' . Symphony::Configuration()->get('sitename', 'general') . '</span>'));
 			$sitemap->appendChild(new XMLElement('h2', 'Site Map, ' . date('d F Y', time())));
 			
 			// build container ULs
@@ -29,17 +29,17 @@
 			$utilities = new XMLElement('ul', null, array('id' => 'utilityNav'));
 			
 			// get values from config: remove spaces, remove any trailing commas and split into an array
-			$this->type_index = explode(',', trim(preg_replace('/ /', '', $this->_Parent->Configuration->get('index_type', 'sitemap')), ','));
-			$this->type_primary = explode(',', trim(preg_replace('/ /', '', $this->_Parent->Configuration->get('primary_type', 'sitemap')), ','));
-			$this->type_utility = explode(',', trim(preg_replace('/ /', '', $this->_Parent->Configuration->get('utilities_type', 'sitemap')), ','));
-			$this->type_exclude = explode(',', trim(preg_replace('/ /', '', $this->_Parent->Configuration->get('exclude_type', 'sitemap')), ','));
+			$this->type_index = explode(',', trim(preg_replace('/ /', '', Symphony::Configuration()->get('index_type', 'sitemap')), ','));
+			$this->type_primary = explode(',', trim(preg_replace('/ /', '', Symphony::Configuration()->get('primary_type', 'sitemap')), ','));
+			$this->type_utility = explode(',', trim(preg_replace('/ /', '', Symphony::Configuration()->get('utilities_type', 'sitemap')), ','));
+			$this->type_exclude = explode(',', trim(preg_replace('/ /', '', Symphony::Configuration()->get('exclude_type', 'sitemap')), ','));
 			
 			// supplement list of pages with additional meta data
 			foreach($pages as $page) {
-				$page_types = $this->_Parent->Database->fetchCol('type', "SELECT `type` FROM `tbl_pages_types` WHERE page_id = '".$page['id']."' ORDER BY `type` ASC");
+				$page_types = Symphony::Database()->fetchCol('type', "SELECT `type` FROM `tbl_pages_types` WHERE page_id = '".$page['id']."' ORDER BY `type` ASC");
 				
-				$page['url'] = '/' . $this->_Parent->resolvePagePath($page['id']);
-				$page['edit-url'] = $this->_Parent->getCurrentPageURL() . 'edit/' . $page['id'] . '/';
+				$page['url'] = '/' . Administration::instance()->resolvePagePath($page['id']);
+				$page['edit-url'] = Administration::instance()->getCurrentPageURL() . 'edit/' . $page['id'] . '/';
 				$page['types'] = $page_types;
 				
 				if (count(array_intersect($page['types'], $this->type_exclude)) > 0) continue;
@@ -90,12 +90,12 @@
 				'http-equiv' => 'Content-Type',
 				'context' => 'text/html; charset=utf-8'
 			)));
-			$head->appendChild(new XMLElement('title', 'Site Map — ' . $this->_Parent->Configuration->get('sitename', 'general')));
+			$head->appendChild(new XMLElement('title', 'Site Map — ' . Symphony::Configuration()->get('sitename', 'general')));
 			$head->appendChild(new XMLElement('link', null, array(
 				'rel' => 'stylesheet',
 				'type' => 'text/css',
 				'media' => 'print, screen',
-				'href' => URL . '/extensions/sitemap/assets/slickmap-custom.css'
+				'href' => URL . '/extensions/sitemap/assets/sitemap.map.css'
 			)));
 			$head->appendChild(new XMLElement('link', null, array(
 				'rel' => 'stylesheet',

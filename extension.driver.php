@@ -4,7 +4,7 @@
 	
 		public function about(){
 			return array('name' => 'Sitemap',
-						 'version' => '1.0.1',
+						 'version' => '1.0.2',
 						 'release-date' => '2010-08-30',
 						 'author' => array('name' => 'Nick Dunn',
 										   'website' => 'http://nick-dunn.co.uk')
@@ -32,20 +32,18 @@
 		}
 		
 		public function install() {
-			
-			if (!$this->_Parent->Configuration->get('primary_type', 'sitemap')) {
-				$this->_Parent->Configuration->set('index_type', 'index', 'sitemap');
-				$this->_Parent->Configuration->set('primary_type', 'primary', 'sitemap');
-				$this->_Parent->Configuration->set('utilities_type', 'global', 'sitemap');
-				$this->_Parent->Configuration->set('exclude_type', 'hidden, XML, 403, 404', 'sitemap');
+			if (!Symphony::Configuration()->get('primary_type', 'sitemap')) {
+				Symphony::Configuration()->set('index_type', 'index', 'sitemap');
+				Symphony::Configuration()->set('primary_type', 'primary', 'sitemap');
+				Symphony::Configuration()->set('utilities_type', 'global', 'sitemap');
+				Symphony::Configuration()->set('exclude_type', 'hidden, XML, 403, 404', 'sitemap');
 			}
-			return $this->_Parent->saveConfig();
+			return Administration::instance()->saveConfig();
 		}
 		
 		public function uninstall() {
-			
-			$this->_Parent->Configuration->remove('sitemap');
-			return $this->_Parent->saveConfig();
+			Symphony::Configuration()->remove('sitemap');
+			return Administration::instance()->saveConfig();
 		}
 		
 		public function __appendPreferences($context) {
@@ -58,7 +56,7 @@
 			$label->appendChild(
 				Widget::Input(
 					'settings[sitemap][index_type]',
-					General::Sanitize($this->_Parent->Configuration->get('index_type', 'sitemap'))
+					General::Sanitize(Symphony::Configuration()->get('index_type', 'sitemap'))
 				)
 			);
 			$group->appendChild($label);
@@ -67,7 +65,7 @@
 			$label->appendChild(
 				Widget::Input(
 					'settings[sitemap][primary_type]',
-					General::Sanitize($this->_Parent->Configuration->get('primary_type', 'sitemap'))
+					General::Sanitize(Symphony::Configuration()->get('primary_type', 'sitemap'))
 				)
 			);
 			$group->appendChild($label);
@@ -76,7 +74,7 @@
 			$label->appendChild(
 				Widget::Input(
 					'settings[sitemap][utilities_type]',
-					General::Sanitize($this->_Parent->Configuration->get('utilities_type', 'sitemap'))
+					General::Sanitize(Symphony::Configuration()->get('utilities_type', 'sitemap'))
 				)
 			);
 			$group->appendChild($label);
@@ -85,7 +83,7 @@
 			$label->appendChild(
 				Widget::Input(
 					'settings[sitemap][exclude_type]',
-					General::Sanitize($this->_Parent->Configuration->get('exclude_type', 'sitemap'))
+					General::Sanitize(Symphony::Configuration()->get('exclude_type', 'sitemap'))
 				)
 			);
 			$group->appendChild($label);
