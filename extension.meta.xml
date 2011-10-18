@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension id="sitemap">
+	<name>Sitemap Generator</name>
+	<description>Print a beautiful sitemap of your Symphony site. Perfect for information architects!</description>
+	<repo type="github">https://github.com/nickdunn/sitemap</repo>
+	<url type="discuss">http://symphony-cms.com/discuss/thread/32607/</url>
+	<types>
+		<type>Other</type>
+	</types>
+	<authors>
+		<author>
+			<name github="nickdunn" symphony="nickdunn">Nick Dunn</name>
+			<website>http://nick-dunn.co.uk</website>
+		</author>
+	</authors>
+	<media>
+		<item type="image" url="http://symphonyextensions.com/nickdunn/sitemap/media/sitemap.png">Example sitemap</item>
+	</media>
+	<releases>
+		<release version="1.0.2" date="2011-02-07" min="2.2" />
+	</releases>
+</extension>

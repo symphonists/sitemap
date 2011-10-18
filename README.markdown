@@ -1,10 +1,5 @@
 # Sitemap
 
-* Version: 1.0.2
-* Author: Nick Dunn (http://nick-dunn.co.uk)
-* Build Date: 2011-02-07
-* Requirements: Symphony 2.2
-
 ## Installation
 
 1. Upload the 'sitemap' folder in this archive to your Symphony 'extensions' folder.
