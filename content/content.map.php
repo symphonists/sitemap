@@ -15,7 +15,7 @@
 		function view(){
 			
 			// fetch all pages
-			$pages = Symphony::Database()->fetch("SELECT p.* FROM `tbl_pages` AS p ORDER BY p.sortorder ASC");
+			$pages = PageManager::fetch();
 			
 			// build container DIV
 			$sitemap = new XMLElement('div', null, array('class' => 'sitemap'));
@@ -36,17 +36,15 @@
 			
 			// supplement list of pages with additional meta data
 			foreach($pages as $page) {
-				$page_types = Symphony::Database()->fetchCol('type', "SELECT `type` FROM `tbl_pages_types` WHERE page_id = '".$page['id']."' ORDER BY `type` ASC");
 				
-				$page['url'] = '/' . Administration::instance()->resolvePagePath($page['id']);
+				$page['url'] = '/' . implode('/', Administration::instance()->resolvePagePath($page['id']));
 				$page['edit-url'] = Administration::instance()->getCurrentPageURL() . 'edit/' . $page['id'] . '/';
-				$page['types'] = $page_types;
 				
-				if (count(array_intersect($page['types'], $this->type_exclude)) > 0) continue;
+				if (count(array_intersect($page['type'], $this->type_exclude)) > 0) continue;
 				
-				$page['is_home'] = (count(array_intersect($page['types'], $this->type_index))) ? true : false;				
-				$page['is_primary'] = (count(array_intersect($page['types'], $this->type_primary)) > 0) ? true : false;
-				$page['is_utility'] = (count(array_intersect($page['types'], $this->type_utility)) > 0) ? true : false;
+				$page['is_home'] = (count(array_intersect($page['type'], $this->type_index))) ? true : false;				
+				$page['is_primary'] = (count(array_intersect($page['type'], $this->type_primary)) > 0) ? true : false;
+				$page['is_utility'] = (count(array_intersect($page['type'], $this->type_utility)) > 0) ? true : false;
 				
 				$this->_pages[] = $page;
 			}
@@ -120,7 +118,7 @@
 		
 		private function appendPage(&$wrapper, $page, $level=1, $root=false, $add_children=true) {
 			
-			$types = (is_array($page['types'])) ? implode(' ', $page['types']) : NULL;
+			$types = (is_array($page['type'])) ? implode(' ', $page['type']) : NULL;
 			
 			// concatenate URL with params
 			$meta = new XMLElement(

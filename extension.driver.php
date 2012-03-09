@@ -1,20 +1,11 @@
 <?php
 
 	Class extension_Sitemap extends Extension{
-	
-		public function about(){
-			return array('name' => 'Sitemap',
-						 'version' => '1.0.2',
-						 'release-date' => '2011-02-07',
-						 'author' => array('name' => 'Nick Dunn',
-										   'website' => 'http://nick-dunn.co.uk')
-				 		);
-		}
 		
 		public function fetchNavigation() {
 			return array(
 				array(
-					'location' => 'Blueprints',
+					'location' => __('Blueprints'),
 					'name'	=> 'Site Map',
 					'link'	=> '/map/',
 				),
@@ -92,5 +83,3 @@
 		}
 		
 	}
-
-?>
