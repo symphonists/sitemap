@@ -80,8 +80,7 @@
 			
 			// build a vanilla HTML document			
 			$html = new XMLElement('html');
-			$html->setDTD('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">');
-			$html->setAttribute('lang', __LANG__);
+			$html->setDTD('<!DOCTYPE html>');
 			
 			$head = new XMLElement('head');
 			$head->appendChild(new XMLElement('meta', null, array(
