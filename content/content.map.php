@@ -84,8 +84,7 @@
 			
 			$head = new XMLElement('head');
 			$head->appendChild(new XMLElement('meta', null, array(
-				'http-equiv' => 'Content-Type',
-				'context' => 'text/html; charset=utf-8'
+				'charset' => 'utf-8'
 			)));
 			$head->appendChild(new XMLElement('title', 'Site Map — ' . Symphony::Configuration()->get('sitename', 'general')));
 			$head->appendChild(new XMLElement('link', null, array(
