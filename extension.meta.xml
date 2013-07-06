@@ -16,9 +16,6 @@
 			<website>http://nick-dunn.co.uk</website>
 		</author>
 	</authors>
-	<media>
-		<item type="image" url="http://symphonyextensions.com/nickdunn/sitemap/media/sitemap.png">Example sitemap</item>
-	</media>
 	<releases>
 		<release version="1.1.0" date="2012-03-09" min="2.3.x" />
 		<release version="1.0.2" date="2011-02-07" min="2.2" max="2.2.x" />
